@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.A.S. Interiors - Crafted Luxury</title>
+    <style>
+        /* --- 0. Variables and Base Reset --- */
+        :root {
+            --charcoal-color: #1a1a1a;
+            --cream-color: #f7f7f5;
+            --accent-color: #a87d32; /* Rich gold/brass accent */
+            --serif-font: 'Playfair Display', Georgia, serif; /* Placeholder for a luxury serif */
+            --sans-font: 'Inter', Helvetica, Arial, sans-serif; /* Placeholder for a clean sans-serif */
+        }
+
+        /* Basic Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--sans-font);
+            color: var(--charcoal-color);
+            background-color: var(--cream-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--serif-font);
+            font-weight: 400;
+        }
+
+        /* --- 1. HERO SECTION (Full-Screen Parallax) --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Crucial for containing the moving background */
+            text-align: center;
+        }
+
+        /* The moving background image layer */
+        #hero .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%; /* Slightly larger than viewport to allow movement */
+            background: url('https://picsum.photos/1920/1200?random=1') no-repeat center center/cover;
+            /* JS will apply transform: translateY() here */
+        }
+
+        /* Text overlay content */
+        #hero .content {
+            position: relative;
+            z-index: 10;
+            color: white;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        #hero h1 {
+            font-size: 5rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #906b29;
+        }
+
+        /* --- 2. PRODUCT GALLERY SECTION --- */
+        .gallery-container {
+            padding: 8rem 5%;
+            background-color: var(--cream-color);
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .gallery-header h2 {
+            font-size: 3rem;
+        }
+
+        /* Product Item Layout (using Grid) */
+        .product-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            margin-bottom: 12rem;
+            overflow: hidden;
+        }
+
+        /* Reverse the order for visual interest */
+        .product-item.reversed {
+            grid-template-areas: "info image";
+        }
+        .product-item.reversed .product-image-wrapper { grid-area: image; }
+        .product-item.reversed .product-info { grid-area: info; }
+
+        /* Positioning for Parallax Image */
+        .product-image-wrapper {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 110%; /* Makes image slightly larger for vertical movement */
+            object-fit: cover;
+            /* JS will apply transform: translateY() here */
+            transition: transform 0.1s linear; /* Smooth scrolling animation */
+        }
+
+        /* Info Text Styling */
+        .product-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .material-tag {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background-color: var(--charcoal-color);
+            color: var(--cream-color);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-details {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            color: var(--charcoal-color);
+            text-decoration: none;
+            padding-bottom: 0.1rem;
+            border-bottom: 1px solid currentColor;
+            transition: border-color 0.3s;
+        }
+
+        .view-details:hover {
+            border-color: var(--accent-color);
+        }
+
+        /* Placeholder for a Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--charcoal-color);
+            color: var(--cream-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header style="padding: 1rem 5%; background: var(--charcoal-color); color: white;">
+        <nav style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-family: var(--serif-font); font-size: 1.5rem; letter-spacing: 0.1em;">M.A.S.</div>
+            <a href="#collection" style="color: white; text-decoration: none;">Collection</a>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="parallax-layer" data-speed="0.2"></div>
+        <div class="content">
+            <h1>M. A. S. Interiors</h1>
+            <p>Crafted for the future, inspired by tradition.</p>
+            <a href="#collection" class="button">Explore Collection</a>
+        </div>
+    </section>
+
+    <section id="collection" class="gallery-container">
+        <div class="gallery-header">
+            <h2>The Masterpiece Collection</h2>
+            <p>Curated design. Uncompromising quality. Find your centerpiece.</p>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image-wrapper" data-speed="0.7">
+                <img src="https://picsum.photos/800/600?random=2" alt="Zenith Italian Leather Sofa">
+            </div>
+            
+            <div class="product-info">
+                <h3>Zenith Sofa</h3>
+                <p class="material-tag">Italian Leather & Walnut</p>
+                <p>A statement of enduring style, crafted with hand-stitched leather and a sustainably sourced solid wood frame. Available in Charcoal and Ecru.</p>
+                <a href="#" class="view-details">View Details →</a>
+            </div>
+        </div>
+
+        <div class="product-item reversed">
+            <div class="product-image-wrapper" data-speed="0.5">
+                <img src="https://picsum.photos/800/600?random=3" alt="Eos Marble Dining Table">
+            </div>
+            
+            <div class="product-info">
+                <h3>Eos Dining Table</h3>
+                <p class="material-tag">Carrara Marble & Brass</p>
+                <p>An architectural focal point, featuring a sculpted base and a polished slab of natural Carrara marble. Seats up to ten guests.</p>
+                <a href="#" class="view-details">View Details →</a>
+            </div>
+        </div>
+
+        <div class="product-item">
+            <div class="product-image-wrapper" data-speed="0.9">
+                <img src="https://picsum.photos/800/600?random=4" alt="Luxus Accent Chair">
+            </div>
+            
+            <div class="product-info">
+                <h3>Luxus Chair</h3>
+                <p class="material-tag">Velvet & Chrome</p>
+                <p>The perfect accent piece. A deep-tufted velvet cushion resting on a polished, sculptural chrome base.</p>
+                <a href="#" class="view-details">View Details →</a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 M. A. S. Interiors. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+
+            // 1. Handle HERO SECTION Parallax
+            const heroLayer = document.querySelector('#hero .parallax-layer');
+            const heroSpeed = parseFloat(heroLayer.getAttribute('data-speed'));
+            // Move the background slower than the scroll
+            heroLayer.style.transform = `translateY(${scrollPosition * heroSpeed}px)`;
+
+
+            // 2. Handle PRODUCT GALLERY Parallax
+            const parallaxImages = document.querySelectorAll('.product-image-wrapper img');
+
+            parallaxImages.forEach(image => {
+                const wrapper = image.parentElement;
+                const speed = parseFloat(wrapper.getAttribute('data-speed'));
+
+                // Calculate the position relative to the element's container
+                const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
+                
+                // Calculate movement: Slower speeds (e.g., 0.5) mean the image moves less (more parallax depth).
+                // Subtracting the container's top position localizes the effect to when the container is in view.
+                const movement = (scrollPosition - containerTop) * (1 - speed) * -0.5;
+
+                // Apply the transformation
+                image.style.transform = `translateY(${movement}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
